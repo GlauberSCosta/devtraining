@@ -38,7 +38,7 @@ export class CoursesService {
     this.courses[indexCourse] = updateCourseDto;
   }
 
-  delte(id: string) {
+  delete(id: string) {
     const indexCourse = this.courses.findIndex(
       (course: Course) => course.id == Number(id),
     );
