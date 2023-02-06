@@ -25,7 +25,7 @@ export class CoursesController {
     return this.coursesService.findOne(id);
   }
   @Post()
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.CREATED)
   create(@Body() createCourseDto: CreateCourseDto) {
     return this.coursesService.create(createCourseDto);
   }
@@ -37,6 +37,6 @@ export class CoursesController {
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.coursesService.delete(id);
+    return this.coursesService.delete(+id);
   }
 }
