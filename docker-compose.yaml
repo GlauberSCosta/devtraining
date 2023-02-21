@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name:  devtraining-nestjs-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - db
+
+  db:
+    build: .docker/postgres
+    container_name: devtraining-nestjs-db
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    volumes:
+      - .docker/dbdata:/var/lib/postgres/data
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=devtrainingnestjs
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: devtrainingnestjs-pgadmin
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
