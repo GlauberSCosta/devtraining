@@ -27,7 +27,7 @@ export class CoursesService {
   findOne(id: string) {
     const course = this.courseRepository.findOne({
       where: {
-        id: +id,
+        id: id,
       },
       relations: ['tags'],
     });
